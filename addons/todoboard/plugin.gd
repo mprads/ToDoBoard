@@ -3,14 +3,12 @@ extends EditorPlugin
 
 const TODOS_DOCK_SCENE = preload("res://addons/todoboard/todo_dock/todos_dock.tscn")
 const TODO_BOARD_SCENE = preload("res://addons/todoboard/board/td_board.tscn")
+const TODO_ITEM = preload("res://addons/todoboard/scripts/todo_item.gd")
 
 var todos_dock_instance: ToDosDock
 var todo_board_instance: TDBoard
 
-var scan_running := false
-
 var todos := {}
-var todo_tags := ["TODO", "BUG", "FIXME"]
 
 func _enter_tree() -> void:
 	todo_board_instance = TODO_BOARD_SCENE.instantiate()
@@ -92,22 +90,25 @@ func _scan_file(path: String, file_name: String) -> void:
 	var contents := file.get_as_text()
 	var regex := _build_regex()
 	var results := regex.search_all(contents)
-	
+
 	for result in results:
-		var type := result.get_string(1)
-		var description := result.get_string(3)
+		var todo_item := TODO_ITEM.new()
+		var result_tag := result.get_string(1)
+		todo_item.description = result.get_string(3)
+		todo_item.script_path = file_path
+		todo_item.type = ToDoItem.get_type(result_tag)
 		
 		if todos.has(file_path):
-			todos[file_path].append({ "type": type, "description": description })
+			todos[file_path].append(todo_item)
 		else:
-			todos[file_path] = [{ "type": type, "description": description }]
+			todos[file_path] = [todo_item]
 
 func _build_regex() -> RegEx:
 	var regex = RegEx.new()
 	var combined_tags := ""
 	
-	for tag in todo_tags:
-		combined_tags += tag + "|"
+	for type in ToDoItem.Type.values():
+		combined_tags += ToDoItem.TYPE_TAG[type] + "|"
 	combined_tags = combined_tags.trim_suffix("|")
 	
 	var regex_query = "(?:#|//)\\s*(%s)\\s*(\\:)?\\s*([^\\n]+)" % combined_tags
@@ -122,4 +123,4 @@ func _on_file_system_changed() -> void:
 	todos = {}
 	_scan_directory()
 	todos_dock_instance.build_tree(todos)
-	print(todos)
+	printt("TODOS: ", todos)

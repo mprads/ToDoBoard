@@ -22,6 +22,6 @@ func build_tree(todos: Dictionary) -> void:
 
 		for todo in todos[file]:
 			var todo_item := tree.create_item(file_tree_item)
-			todo_item.set_text(0, str(todo["type"]) + ": " + todo["description"])
+			todo_item.set_text(0, str(ToDoItem.TYPE_TAG[todo.type]) + ": " + todo.description)
 			todo_item.add_button(1, EXTERNAL_LINK, -1, false, "Jump to source")
-			todo_item.set_custom_color(0, Color.GREEN)
+			todo_item.set_custom_color(0, ToDoItem.TYPE_COLOR[todo.type])
