@@ -9,8 +9,8 @@ var todo_board_instance: TDBoard
 
 var scan_running := false
 
-var todos := []
-var todo_pattern = ["\\bTODO\\b", "\\bBUG\\b", "\\bFIXME\\b"]
+var todos := {}
+var todo_tags := ["TODO", "BUG", "FIXME"]
 
 func _enter_tree() -> void:
 	todo_board_instance = TODO_BOARD_SCENE.instantiate()
@@ -22,7 +22,8 @@ func _enter_tree() -> void:
 	
 	EditorInterface.get_resource_filesystem().connect("filesystem_changed", _on_file_system_changed)
 	
-	todos_dock_instance.setup()
+	_scan_directory()
+	todos_dock_instance.build_tree(todos)
 
 
 func _exit_tree() -> void:
@@ -70,7 +71,7 @@ func _scan_directory(path: String = "res://") -> void:
 				if not dir_item in ["addons", ".godot"]:
 					_scan_directory(dir_item)
 			else:
-				if dir_item.get_extension() == "gd":
+				if dir_item.get_extension() == "gd" || dir_item.get_extension() == "cs":
 					_scan_file(path, dir_item)
 			
 			dir_item = dir.get_next()
@@ -92,29 +93,33 @@ func _scan_file(path: String, file_name: String) -> void:
 	var regex := _build_regex()
 	var results := regex.search_all(contents)
 	
-	print(results)
-
+	for result in results:
+		var type := result.get_string(1)
+		var description := result.get_string(3)
+		
+		if todos.has(file_path):
+			todos[file_path].append({ "type": type, "description": description })
+		else:
+			todos[file_path] = [{ "type": type, "description": description }]
 
 func _build_regex() -> RegEx:
 	var regex = RegEx.new()
-	var regex_query := "((\\/\\*)|(#|\\/\\/))\\s*("
+	var combined_tags := ""
 	
-	var formatted_patterns = []
+	for tag in todo_tags:
+		combined_tags += tag + "|"
+	combined_tags = combined_tags.trim_suffix("|")
 	
-	for pattern in todo_pattern:
-		formatted_patterns.append(pattern.insert(0, "((?i)") + ")")
-	
-	for i in formatted_patterns.size():
-		if i == 0:
-			regex_query += formatted_patterns[i]
-		else:
-			regex_query += "|" + formatted_patterns[i]
-
-	regex_query += ")(?(2)[\\s\\S]*?\\*\\/|.*)"
+	var regex_query = "(?:#|//)\\s*(%s)\\s*(\\:)?\\s*([^\\n]+)" % combined_tags
 	regex.compile(regex_query)
 	
+	assert(regex.is_valid())
+
 	return regex
 
 
 func _on_file_system_changed() -> void:
+	todos = {}
 	_scan_directory()
+	todos_dock_instance.build_tree(todos)
+	print(todos)

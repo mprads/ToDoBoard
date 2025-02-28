@@ -1,6 +1,9 @@
 extends Node2D
-# TODO: test todo
+# TODO: need to implement thing here
 
 func _ready() -> void:
-	# Bug
+	# BUG this not working properly
+	
+	
+	#FIXME: this is urgent
 	pass
