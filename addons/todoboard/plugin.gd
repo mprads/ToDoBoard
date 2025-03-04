@@ -10,6 +10,7 @@ var todo_board_instance: TDBoard
 
 var todos := {}
 
+
 func _enter_tree() -> void:
 	todo_board_instance = TODO_BOARD_SCENE.instantiate()
 	EditorInterface.get_editor_main_screen().add_child(todo_board_instance)
@@ -94,14 +95,25 @@ func _scan_file(path: String, file_name: String) -> void:
 	for result in results:
 		var todo_item := TODO_ITEM.new()
 		var result_tag := result.get_string(1)
+		
+		var line_number := 0
+
+		for line in contents.split("\n"):
+			if line.strip_edges(true) == result.get_string(0):
+				break
+			else:
+				line_number += 1
+				
 		todo_item.description = result.get_string(3)
 		todo_item.script_path = file_path
 		todo_item.type = ToDoItem.get_type(result_tag)
+		todo_item.line = line_number
 		
 		if todos.has(file_path):
 			todos[file_path].append(todo_item)
 		else:
 			todos[file_path] = [todo_item]
+
 
 func _build_regex() -> RegEx:
 	var regex = RegEx.new()

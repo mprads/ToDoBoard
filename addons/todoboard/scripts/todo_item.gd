@@ -19,6 +19,7 @@ const TYPE_TAG := {
 var script_path: String
 var type: Type
 var description: String
+var line: int
 
 static func get_type(tag: String) -> Type:
 	var lower_todo := ToDoItem.TYPE_TAG[Type.TODO].to_lower()
