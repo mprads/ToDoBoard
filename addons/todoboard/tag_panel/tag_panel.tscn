@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpgr0qhbes0oo"]
+
+[ext_resource type="Texture2D" uid="uid://2j3lsdet1524" path="res://addons/assets/icons/file.png" id="1_7vweu"]
+[ext_resource type="PackedScene" uid="uid://cjnnh0o10do25" path="res://addons/todoboard/card/card.tscn" id="1_dwk8m"]
+
+[node name="TagPanel" type="Panel"]
+clip_contents = true
+custom_minimum_size = Vector2(350, 625)
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_vertical = 4
+
+[node name="BodyVBox" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(350, 30)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HeaderContainer" type="HBoxContainer" parent="BodyVBox"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="TaskCount" type="Label" parent="BodyVBox/HeaderContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "5"
+horizontal_alignment = 2
+
+[node name="TagLabel" type="Label" parent="BodyVBox/HeaderContainer"]
+layout_mode = 2
+text = " Tag Goes Here"
+
+[node name="Button" type="Button" parent="BodyVBox/HeaderContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+icon = ExtResource("1_7vweu")
+
+[node name="HSeparator" type="HSeparator" parent="BodyVBox"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="BodyVBox"]
+custom_minimum_size = Vector2(300, 560)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TaskContainer" type="VBoxContainer" parent="BodyVBox/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="Card" parent="BodyVBox/ScrollContainer/TaskContainer" instance=ExtResource("1_dwk8m")]
+layout_mode = 2
+
+[node name="Card2" parent="BodyVBox/ScrollContainer/TaskContainer" instance=ExtResource("1_dwk8m")]
+layout_mode = 2
+
+[node name="Card3" parent="BodyVBox/ScrollContainer/TaskContainer" instance=ExtResource("1_dwk8m")]
+layout_mode = 2
+
+[node name="Card4" parent="BodyVBox/ScrollContainer/TaskContainer" instance=ExtResource("1_dwk8m")]
+layout_mode = 2
+
+[node name="Card5" parent="BodyVBox/ScrollContainer/TaskContainer" instance=ExtResource("1_dwk8m")]
+layout_mode = 2
+
+[node name="Card6" parent="BodyVBox/ScrollContainer/TaskContainer" instance=ExtResource("1_dwk8m")]
+layout_mode = 2
