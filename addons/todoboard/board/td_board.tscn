@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://ogwaajakj736"]
+[gd_scene load_steps=2 format=3 uid="uid://ogwaajakj736"]
 
 [ext_resource type="Script" uid="uid://biwmxkq8fofah" path="res://addons/todoboard/board/td_board.gd" id="1_qu3sb"]
-[ext_resource type="PackedScene" uid="uid://cpgr0qhbes0oo" path="res://addons/todoboard/tag_panel/tag_panel.tscn" id="2_ban7i"]
 
 [node name="TDBoard" type="HBoxContainer"]
 anchors_preset = 15
@@ -12,12 +11,3 @@ grow_vertical = 2
 theme_override_constants/separation = 16
 alignment = 1
 script = ExtResource("1_qu3sb")
-
-[node name="TagPanel" parent="." instance=ExtResource("2_ban7i")]
-layout_mode = 2
-
-[node name="TagPanel2" parent="." instance=ExtResource("2_ban7i")]
-layout_mode = 2
-
-[node name="TagPanel3" parent="." instance=ExtResource("2_ban7i")]
-layout_mode = 2

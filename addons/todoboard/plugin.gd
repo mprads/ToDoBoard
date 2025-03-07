@@ -8,7 +8,7 @@ const TODO_ITEM = preload("res://addons/todoboard/scripts/todo_item.gd")
 var todos_dock_instance: ToDosDock
 var todo_board_instance: TDBoard
 
-var todos := {}
+var todos: Dictionary[String, Array] = {}
 
 
 func _enter_tree() -> void:

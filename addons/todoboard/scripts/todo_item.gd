@@ -35,3 +35,6 @@ static func get_type(tag: String) -> Type:
 			return Type.FIXME
 		_:
 			return Type.TODO
+
+static func get_all_types() -> Array[Type]:
+	return Type.values()
