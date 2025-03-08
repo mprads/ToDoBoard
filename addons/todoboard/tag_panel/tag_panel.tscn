@@ -20,29 +20,37 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="BodyVBox"]
+[node name="PanelContainer" type="PanelContainer" parent="BodyVBox"]
+layout_mode = 2
+
+[node name="HeaderColor" type="ColorRect" parent="BodyVBox/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+color = Color(0.517647, 0.862745, 0.556863, 0.431373)
+
+[node name="MarginContainer" type="MarginContainer" parent="BodyVBox/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 
-[node name="HeaderContainer" type="HBoxContainer" parent="BodyVBox/MarginContainer"]
+[node name="HeaderContainer" type="HBoxContainer" parent="BodyVBox/PanelContainer/MarginContainer"]
 custom_minimum_size = Vector2(300, 40)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="TaskCount" type="Label" parent="BodyVBox/MarginContainer/HeaderContainer"]
+[node name="TaskCount" type="Label" parent="BodyVBox/PanelContainer/MarginContainer/HeaderContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
 text = "99"
 horizontal_alignment = 2
 
-[node name="PanelTag" type="Label" parent="BodyVBox/MarginContainer/HeaderContainer"]
+[node name="PanelTag" type="Label" parent="BodyVBox/PanelContainer/MarginContainer/HeaderContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "TODO"
 
-[node name="Button" type="Button" parent="BodyVBox/MarginContainer/HeaderContainer"]
+[node name="Button" type="Button" parent="BodyVBox/PanelContainer/MarginContainer/HeaderContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 icon = ExtResource("1_7vweu")
@@ -59,4 +67,4 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 16
+theme_override_constants/separation = 8

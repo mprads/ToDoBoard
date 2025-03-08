@@ -6,7 +6,7 @@ const TAG_PANEL = preload("res://addons/todoboard/tag_panel/tag_panel.tscn")
 const CARD = preload("res://addons/todoboard/card/card.tscn")
 
 
-func build_panels(todos: Dictionary[String, Array]) ->void:
+func build_panels(todos: Dictionary[String, Array]) -> void:
 	for child in get_children():
 		child.queue_free()
 	

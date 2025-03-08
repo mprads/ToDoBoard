@@ -5,9 +5,9 @@ class_name ToDoItem
 enum Type { TODO, BUG, FIXME }
 
 const TYPE_COLOR := {
-	ToDoItem.Type.TODO: Color.PALE_GREEN,
-	ToDoItem.Type.BUG: Color.SANDY_BROWN,
-	ToDoItem.Type.FIXME: Color.INDIAN_RED,
+	ToDoItem.Type.TODO: Color(0.5961, 0.9843, 0.5961, 0.5),
+	ToDoItem.Type.BUG: Color(0.9569, 0.6431, 0.3765, 0.5),
+	ToDoItem.Type.FIXME: Color(0.8039, 0.3608, 0.3608, 0.5),
 }
 
 const TYPE_TAG := {
@@ -44,3 +44,7 @@ static func get_tag(type: int) -> String:
 
 static func get_all_tags() -> Array:
 	return TYPE_TAG.values()
+
+
+static func get_color(type: int) -> Color:
+	return TYPE_COLOR[type]

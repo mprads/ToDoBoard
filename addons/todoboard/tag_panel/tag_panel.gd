@@ -3,6 +3,7 @@ extends Panel
 
 const CARD = preload("res://addons/todoboard/card/card.tscn")
 
+@onready var header_color: ColorRect = %HeaderColor
 @onready var task_count: Label = %TaskCount
 @onready var panel_tag: Label = %PanelTag
 @onready var task_container: VBoxContainer = %TaskContainer
@@ -14,6 +15,7 @@ var panel_todos: Array[ToDoItem] = []
 
 func _ready() -> void:
 	panel_tag.text = ToDoItem.get_tag(panel_type)
+	header_color.color = Color(ToDoItem.get_color(panel_type))
 
 
 func _create_cards() -> void:
