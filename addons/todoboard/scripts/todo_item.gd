@@ -7,19 +7,20 @@ enum Type { TODO, BUG, FIXME }
 const TYPE_COLOR := {
 	ToDoItem.Type.TODO: Color.PALE_GREEN,
 	ToDoItem.Type.BUG: Color.SANDY_BROWN,
-	ToDoItem.Type.FIXME: Color.INDIAN_RED
+	ToDoItem.Type.FIXME: Color.INDIAN_RED,
 }
 
 const TYPE_TAG := {
 	ToDoItem.Type.TODO: "TODO",
 	ToDoItem.Type.BUG: "BUG",
-	ToDoItem.Type.FIXME: "FIXME"
+	ToDoItem.Type.FIXME: "FIXME",
 }
 
 var script_path: String
 var type: Type
 var description: String
 var line: int
+
 
 static func get_type(tag: String) -> Type:
 	var lower_todo := ToDoItem.TYPE_TAG[Type.TODO].to_lower()
@@ -34,7 +35,12 @@ static func get_type(tag: String) -> Type:
 		lower_fixme:
 			return Type.FIXME
 		_:
-			return Type.TODO
+			return -1
 
-static func get_all_types() -> Array[Type]:
-	return Type.values()
+
+static func get_tag(type: int) -> String:
+	return TYPE_TAG[type]
+
+
+static func get_all_tags() -> Array:
+	return TYPE_TAG.values()

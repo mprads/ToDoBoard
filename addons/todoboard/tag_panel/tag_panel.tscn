@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpgr0qhbes0oo"]
+[gd_scene load_steps=3 format=3 uid="uid://cpgr0qhbes0oo"]
 
 [ext_resource type="Texture2D" uid="uid://2j3lsdet1524" path="res://addons/assets/icons/file.png" id="1_7vweu"]
 [ext_resource type="Script" uid="uid://dh1tlhslam6h6" path="res://addons/todoboard/tag_panel/tag_panel.gd" id="1_86ifu"]
-[ext_resource type="PackedScene" uid="uid://cjnnh0o10do25" path="res://addons/todoboard/card/card.tscn" id="1_dwk8m"]
 
 [node name="TagPanel" type="Panel"]
 clip_contents = true
@@ -32,14 +31,16 @@ layout_mode = 2
 size_flags_vertical = 4
 
 [node name="TaskCount" type="Label" parent="BodyVBox/MarginContainer/HeaderContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
-text = "5"
+text = "99"
 horizontal_alignment = 2
 
-[node name="TagLabel" type="Label" parent="BodyVBox/MarginContainer/HeaderContainer"]
+[node name="PanelTag" type="Label" parent="BodyVBox/MarginContainer/HeaderContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-text = " Tag Goes Here"
+text = "TODO"
 
 [node name="Button" type="Button" parent="BodyVBox/MarginContainer/HeaderContainer"]
 layout_mode = 2
@@ -55,24 +56,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="TaskContainer" type="VBoxContainer" parent="BodyVBox/ScrollContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 16
-
-[node name="Card" parent="BodyVBox/ScrollContainer/TaskContainer" instance=ExtResource("1_dwk8m")]
-layout_mode = 2
-
-[node name="Card2" parent="BodyVBox/ScrollContainer/TaskContainer" instance=ExtResource("1_dwk8m")]
-layout_mode = 2
-
-[node name="Card3" parent="BodyVBox/ScrollContainer/TaskContainer" instance=ExtResource("1_dwk8m")]
-layout_mode = 2
-
-[node name="Card4" parent="BodyVBox/ScrollContainer/TaskContainer" instance=ExtResource("1_dwk8m")]
-layout_mode = 2
-
-[node name="Card5" parent="BodyVBox/ScrollContainer/TaskContainer" instance=ExtResource("1_dwk8m")]
-layout_mode = 2
-
-[node name="Card6" parent="BodyVBox/ScrollContainer/TaskContainer" instance=ExtResource("1_dwk8m")]
-layout_mode = 2

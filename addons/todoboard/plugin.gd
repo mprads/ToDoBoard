@@ -22,6 +22,7 @@ func _enter_tree() -> void:
 	EditorInterface.get_resource_filesystem().connect("filesystem_changed", _on_file_system_changed)
 	
 	_scan_directory()
+	todo_board_instance.build_panels(todos)
 	todos_dock_instance.build_tree(todos)
 
 
@@ -134,5 +135,6 @@ func _build_regex() -> RegEx:
 func _on_file_system_changed() -> void:
 	todos = {}
 	_scan_directory()
+	
 	todos_dock_instance.build_tree(todos)
-	printt("TODOS: ", todos)
+	todo_board_instance.build_panels(todos)
